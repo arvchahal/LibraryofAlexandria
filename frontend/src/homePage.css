@@ -1,0 +1,35 @@
+/* Reset default margins and paddings */
+body,html {
+  height:100%;
+  margin:0;
+
+}
+.header.image{
+  height:100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.header {
+  text-align: center;
+  color: #7851A9;
+}
+
+.Enter {
+  display: inline-block;
+  padding: 20px;
+  background-color: rgba(192, 138, 240, 0.493);
+  border-radius: 50px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Enter:hover {
+  background-color: #8032e0;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
