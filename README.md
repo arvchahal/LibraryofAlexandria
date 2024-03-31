@@ -69,11 +69,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name – arnav.chahal@vanderbilt.edu
 
-Project Link: [https://github.com/your-username/library-of-alexandria](https://github.com/your-username/library-of-alexandria)
+Project Link: https://github.com/arvchahal/LibraryofAlexandria.git
 
 ## Acknowledgments
 
 - Icons and UI components from React Icons and Material-UI
-- Book data and APIs from [Open Library](https://openlibrary.org/)
+- Book data and APIs from (https://openlibrary.org/)
 
 Join us in rekindling the spirit of the ancient Library of Alexandria with the power of modern technology and community!
