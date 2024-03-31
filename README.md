@@ -48,7 +48,7 @@ To get started with the Library of Alexandria, follow these steps:
 
 - **Frontend**: React.js for building the user interface, Redux for state management.
 - **Backend**: Django for RESTful API services.
-- **Database**: MYSQl for storing user data and book information.
+- **Database**: MYSQL for storing user data and book information.
 - **Machine Learning**: Python with libraries such as NumPy and SciPy for calculating cosine similarity and generating book recommendations.
 
 ## Contributing
