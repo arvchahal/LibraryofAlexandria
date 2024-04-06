@@ -10,67 +10,100 @@
 }
 
 a.Home{
+  margin-left: 0px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 10px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
   text-decoration: none;
-  transition: box-shadow .3s ease, transform .3s ease;
-  color: #FA7202; /* Changes text color on hover */
-
-
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .iconWithText a.Home:hover {
-  box-shadow: 0 8px 16px rgba(192, 138, 240, 0.493);
-  transform: translateY(-2px);
-  color: #FA7202; /* Changes text color on hover */
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
   text-decoration: none;
+  
 }
 
 a.Search{
-  padding-left: 25px;
-  color: #FA7202;
+  margin-left: 25px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 10px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
   text-decoration: none;
-  transition: box-shadow .3s ease, transform .3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
 .iconWithText a.Search:hover {
-  box-shadow: 0 8px 16px rgba(192, 138, 240, 0.493);
-  transform: translateY(-2px);
-  color: #FA7202; /* Changes text color on hover */
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
   text-decoration: none;
+  
 }
 
 a.Your_Library{
+  margin-left: 25px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 10px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
   text-decoration: none;
-  transition: box-shadow .3s ease, transform .3s ease;
-  color: #FA7202; /* Changes text color on hover */
-
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
 .iconWithText a.Your_Library:hover {
-  box-shadow: 0 8px 16px rgba(192, 138, 240, 0.493);
-  transform: translateY(-2px);
-  color: #FA7202; /* Changes text color on hover */
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
   text-decoration: none;
+  
 }
 
+
+
 a.Reccs{
-  color: #FA7202;
+  margin-left: 35px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 20px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
   text-decoration: none;
-  transition: box-shadow .3s ease, transform .3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
 .iconWithText a.Reccs:hover {
-  box-shadow: 0 8px 16px rgba(192, 138, 240, 0.493);
-  transform: translateY(-2px);
-  color: #FA7202; /* Changes text color on hover */
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
 
 .iconWithText a.SignIn {
   margin-left: 105px;
-  color: #FA7202;
+  color: #90bdc9;
   display: inline-block;
   padding: 20px;
-  background-color: #353333;
+  background-color: #212121;
   border-radius: 25px;
   font-weight: bold;
   transition: background-color 0.3s ease;
@@ -80,15 +113,36 @@ a.Reccs{
 
 .iconWithText a.SignIn:hover {
 
-  color: #d98e51;
-  background-color: rgba(192, 138, 240, 0.493);
+  color:#212121 ;
+  background-color: #31495e;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
-.App {
+.homebar {
   display: flex; /* This will align children horizontally */
   justify-content: space-around; /* This spaces out the icons evenly */
   align-items: center; /* This centers the icons vertically */
-  /* You may want to add padding or a specific height */
+  /* Add additional styles here if necessary */
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff; /* Assuming white text fits the theme */
+  text-align: center;
+}
+
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .book-grid {
+    flex-direction: column;
+    align-items: center;
+  }
 }
