@@ -126,18 +126,25 @@ a.Reccs{
   /* Add additional styles here if necessary */
 }
 
+.section {
+  margin-top: 3rem; /* Adjust the top margin as needed */
+  padding-left: 2rem; /* Add padding to the left to align the content inside */
+}
+
 .section-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #fff; /* Assuming white text fits the theme */
-  text-align: center;
+  font-size: 2rem; /* Adjust the font size as needed */
+  margin-bottom: 1rem; /* Adjust the bottom margin as needed */
+  color: #f7dbc3; /* Keep the text color white, as per your theme */
+  text-align: left; /* Align the text to the left */
+  padding-top: 20px; /* Add padding on top if needed */
+  padding-bottom: 20px; /* Add padding at the bottom to create space between the sections */
 }
 
 .book-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: flex-start; /* Align book items to the start */
+  gap: 1rem; /* Adjust the gap between the books as needed */
 }
 
 @media (max-width: 768px) {
