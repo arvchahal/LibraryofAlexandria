@@ -153,3 +153,7 @@ a.Reccs{
     align-items: center;
   }
 }
+
+.book-item{
+  flex-direction: row; /* Align items in a row */
+}
