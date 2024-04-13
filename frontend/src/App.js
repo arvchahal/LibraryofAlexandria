@@ -5,61 +5,65 @@ import { CiSearch } from "react-icons/ci"; //search icon for searching different
 import { HiBuildingLibrary } from "react-icons/hi2"; //library icon returns to the homepage
 import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
+import {classicNovels} from './constants'
 
 function App() {
-  const [latestRels, setRels] = useState([]);
+  const [summer, setSummer] = useState([]);
   const[classics, setClassics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nyt, setnyt] = useState([])
 
-  const classicNovels = [
-    { title: "Pride and Prejudice", author: "Jane Austen" },
-    { title: "Moby-Dick", author: "Herman Melville" },
-    { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
-    { title: "Crime and Punishment", author: "Fyodor Dostoevsky" },
-    { title: "To Kill a Mockingbird", author: "Harper Lee" },
-    { title: "1984", author: "George Orwell" },
-    { title: "The Catcher in the Rye", author: "J.D. Salinger" },
-    { title: "The Odyssey", author: "Homer" },
-    { title: "War and Peace", author: "Leo Tolstoy" },
-    { title: "The Lord of the Rings", author: "J.R.R. Tolkien" },
-    { title: "The Stranger", author: "Albert Camus" },
-    // Additional classic novels
-    { title: "Jane Eyre", author: "Charlotte Brontë" },
-    { title: "Wuthering Heights", author: "Emily Brontë" },
-    { title: "Great Expectations", author: "Charles Dickens" },
-    { title: "Anna Karenina", author: "Leo Tolstoy" },
-    { title: "Madame Bovary", author: "Gustave Flaubert" },
-    { title: "The Adventures of Huckleberry Finn", author: "Mark Twain" },
-    { title: "Don Quixote", author: "Miguel de Cervantes" },
-    { title: "Frankenstein", author: "Mary Shelley" },
-    { title: "Brave New World", author: "Aldous Huxley" },
-    { title: "Lolita", author: "Vladimir Nabokov" },
-    { title: "Ulysses", author: "James Joyce" },
-    { title: "The Picture of Dorian Gray", author: "Oscar Wilde" },
-    { title: "The Grapes of Wrath", author: "John Steinbeck" },
-    { title: "Heart of Darkness", author: "Joseph Conrad" },
-    { title: "Les Misérables", author: "Victor Hugo" },
-    { title: "One Hundred Years of Solitude", author: "Gabriel García Márquez" },
-    { title: "Fahrenheit 451", author: "Ray Bradbury" },
-    { title: "Dracula", author: "Bram Stoker" },
-    { title: "A Tale of Two Cities", author: "Charles Dickens" }
-  ];
+
+
+
   
-  function getRandomBooks(n = 6) {
-    const shuffled = classicNovels.sort(() => 0.5 - Math.random());
+  function getRandomBooks(n = 6, inp) {
+    const shuffled = inp.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, n);
   }
 
   useEffect(() =>{
-  fetchBooks('new+release').then((books) => setRels(books));
+  fetchsummer();
   fetchBooksClassics();
   fetchNYT();
   
 },[])
+const fetchsummer = async () => {
+  setIsLoading(true);
+  try {
+    // Update the query to focus on 'fantasy' genre
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&maxResults=10&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+
+    const data = await response.json();
+    if (data.items) {
+      // Map items to extract necessary book information and sort them by publication date
+      const sortedBooks = data.items
+        .map(book => ({
+          id: book.id,
+          title: book.volumeInfo.title,
+          authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author',
+          publishedDate: book.volumeInfo.publishedDate,
+          image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://via.placeholder.com/150',
+          infoLink: book.volumeInfo.infoLink
+        }))
+        .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)); // Sorting by date, newest first
+
+      setSummer(sortedBooks);
+    } else {
+      setSummer([]); // Ensure to set to empty array if no items are found
+    }
+    setIsLoading(false);
+  } catch (error) {
+    console.error('Failed to fetch books:', error);
+    setSummer([]);
+    setIsLoading(false);
+  }
+};
+
+
   const fetchBooksClassics = async() => {
     setIsLoading(true);
-    const random = getRandomBooks(10);
+    const random = getRandomBooks(10,classicNovels);
     const books = await Promise.all(random.map(book=>{
       const query = `intitle:"${book.title}" inauthor:"${book.author}"`;
       return fetchBooks(query);
@@ -169,9 +173,15 @@ function App() {
 
         {/* Latest Releases Section */}
         <div className='section'>
-          <div className='section-title'>Latest Releases</div>
+          <div className='section-title'>Summer Fantasy</div>
           <div className='book-grid'>
-  
+          {isLoading ? (
+              <div>Loading...</div>
+              ) : (
+                summer.slice(0, 6).map((book) => (
+                  <div key={book.id} className='book-item'>a
+                    <img src={book.image} alt={book.title || 'Book title'} />
+                  </div>)))}
           </div>
         </div>
 

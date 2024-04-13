@@ -160,6 +160,12 @@ a.Reccs{
 }
 .book-item img{
   width: 200px; /* or any other fixed dimensions */
-  height: 300px;
-  object-fit: cover; /* This ensures the image covers the space without distorting aspect ratio */
+  height: 250px;
+  object-fit: fill; /* This ensures the image covers the space without distorting aspect ratio */
+}
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* You may want to change this to 'center' if there's extra space */
+  gap: 1rem; /* Adjust the gap between the books if needed */
 }
