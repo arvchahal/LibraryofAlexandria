@@ -156,4 +156,10 @@ a.Reccs{
 
 .book-item{
   flex-direction: row; /* Align items in a row */
+
+}
+.book-item img{
+  width: 200px; /* or any other fixed dimensions */
+  height: 300px;
+  object-fit: cover; /* This ensures the image covers the space without distorting aspect ratio */
 }
