@@ -32,7 +32,7 @@ const fetchsummer = async () => {
   setIsLoading(true);
   try {
     // Update the query to focus on 'fantasy' genre
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&maxResults=10&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&maxResults=50&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
 
     const data = await response.json();
     if (data.items) {
@@ -47,8 +47,8 @@ const fetchsummer = async () => {
           infoLink: book.volumeInfo.infoLink
         }))
         .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)); // Sorting by date, newest first
-
-      setSummer(sortedBooks);
+      const ag= getRandomBooks(50,sortedBooks)  
+      setSummer(ag);
     } else {
       setSummer([]); // Ensure to set to empty array if no items are found
     }
@@ -178,6 +178,7 @@ const fetchsummer = async () => {
           {isLoading ? (
               <div>Loading...</div>
               ) : (
+                
                 summer.slice(0, 6).map((book) => (
                   <div key={book.id} className='book-item'>a
                     <img src={book.image} alt={book.title || 'Book title'} />

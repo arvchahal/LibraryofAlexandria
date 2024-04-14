@@ -1,13 +1,13 @@
 
 body {
-  background-image: url("./components/nigtlibrary.webp");
+  background-image: url("./components/nigtlibrary.webp");  /* Check this path */
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  height: 100%;
-  
-  width: 100%;
+  height: 100vh;  /* Use vh for full viewport height */
+  width: 100vw;  /* Use vw for full viewport width */
+  margin: 0; /* Remove default margin */
 }
+
 
 .header {
   text-align: center;
