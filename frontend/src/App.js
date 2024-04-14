@@ -76,6 +76,22 @@ const fetchsummer = async () => {
 
   const fetchNYT = async () => {
     setIsLoading(true);
+    // try {
+    //   const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=LeCRVkW6ihsaQ385MnU3n2yWcjucscvW');
+    //   const data = await response.json();
+    //   console.log('ok1')
+    //   const books = data.results.lists.map(book => ({
+    //     id: book.primary_isbn13,
+    //     title: book.title,
+    //     author: book.author,
+    //     image: book.book_image,
+
+    //   }));
+    //   console.log('ok1345')
+
+    //     setnyt(books.flat())
+    //     setIsLoading(false);
+    //   } 
     try {
       const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=LeCRVkW6ihsaQ385MnU3n2yWcjucscvW');
       const data = await response.json();
@@ -84,8 +100,8 @@ const fetchsummer = async () => {
         setnyt(lists)
         setIsLoading(false);
         return data.results.lists||[]; // Adjusted to access lists correctly based on the typical API response
-      } 
-    } catch (error) {
+      } }
+     catch (error) {
       console.log("NYT error"); // Keeping your original error handling style
       setIsLoading(false);
       return []; // Ensuring the function returns an empty array on error
@@ -180,9 +196,11 @@ const fetchsummer = async () => {
               ) : (
                 
                 summer.slice(0, 6).map((book) => (
+
+                  <Link to ={`/book/:{$book.id}`} className='bookLink'>
                   <div key={book.id} className='book-item'>a
                     <img src={book.image} alt={book.title || 'Book title'} />
-                  </div>)))}
+                  </div></Link>)))}
           </div>
         </div>
 
@@ -194,9 +212,11 @@ const fetchsummer = async () => {
               <div>Loading...</div>
               ) : (
                 nyt.slice(0, 6).map((book) => (
-                  <div key={book.id} className='book-item'>
+                  <Link to ={`/book/:${book.primary_isbn13}`} className='bookLink'>
+                  <div key={book.primary_isbn13} className='book-item'>
                     <img src={book.book_image} alt={book.title || 'Book title'} />
-                  </div>)))}
+                  </div>
+                  </Link>)))}
 
             </div>
         </div>
@@ -210,9 +230,11 @@ const fetchsummer = async () => {
               <div>Loading...</div>
               ) : (
                 classics.slice(0, 6).map((book) => (
+                  <Link to ={`/book/:{$book.id}`} className='bookLink'>
                   <div key={book.id} className='book-item'>
                     <img src={book.volumeInfo?.imageLinks?.thumbnail} alt={book.volumeInfo?.title || 'Book title'} />
-                  </div>)))}
+                  </div></Link>)))
+                  }
           </div>
         </div>
 
