@@ -32,7 +32,7 @@ const fetchsummer = async () => {
   setIsLoading(true);
   try {
     // Update the query to focus on 'fantasy' genre
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&maxResults=50&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&maxResults=40&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
 
     const data = await response.json();
     if (data.items) {
@@ -41,13 +41,15 @@ const fetchsummer = async () => {
         .map(book => ({
           id: book.id,
           title: book.volumeInfo.title,
+          isbn13: book.volumeInfo.industryIdentifiers?.find(identifier => identifier.type === "ISBN_13")?.identifier || "ISBN not available",
+
           authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author',
           publishedDate: book.volumeInfo.publishedDate,
           image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://via.placeholder.com/150',
           infoLink: book.volumeInfo.infoLink
         }))
         .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)); // Sorting by date, newest first
-      const ag= getRandomBooks(50,sortedBooks)  
+      const ag= getRandomBooks(40,sortedBooks)  
       setSummer(ag);
     } else {
       setSummer([]); // Ensure to set to empty array if no items are found
@@ -76,22 +78,7 @@ const fetchsummer = async () => {
 
   const fetchNYT = async () => {
     setIsLoading(true);
-    // try {
-    //   const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=LeCRVkW6ihsaQ385MnU3n2yWcjucscvW');
-    //   const data = await response.json();
-    //   console.log('ok1')
-    //   const books = data.results.lists.map(book => ({
-    //     id: book.primary_isbn13,
-    //     title: book.title,
-    //     author: book.author,
-    //     image: book.book_image,
 
-    //   }));
-    //   console.log('ok1345')
-
-    //     setnyt(books.flat())
-    //     setIsLoading(false);
-    //   } 
     try {
       const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=LeCRVkW6ihsaQ385MnU3n2yWcjucscvW');
       const data = await response.json();
@@ -109,41 +96,40 @@ const fetchsummer = async () => {
   }
 
 
-  const fetchBooks = async(query) =>{
-    try{
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=6&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+  const fetchBooks = async (query) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
       const data = await response.json();
       if (data.items) {
-        // Sort books by published date in descending order
-        data.items.sort((a, b) => {
-          const dateA = a.volumeInfo.publishedDate ? new Date(a.volumeInfo.publishedDate) : new Date(0); // Use epoch date as fallback
-          const dateB = b.volumeInfo.publishedDate ? new Date(b.volumeInfo.publishedDate) : new Date(0); // Use epoch date as fallback
-          return dateB - dateA; // Descending order
-        });
-  
-        // Filter unique titles and take only the first few if needed
-        let seenTitles = new Set();
-        let lst = data.items.filter(book => {
-          let title = book.volumeInfo.title;
-          if (!seenTitles.has(title)) {
-            seenTitles.add(title);
-            return true;
-          }
-          return false;
-        });
+        const sortedBooks = data.items
+          .map(book => ({
+            id: book.id,
+            title: book.volumeInfo.title,
+            isbn13: book.volumeInfo.industryIdentifiers?.find(identifier => identifier.type === "ISBN_13")?.identifier || "ISBN not available",
+
+            authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author',
+            publishedDate: book.volumeInfo.publishedDate,
+            image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'https://via.placeholder.com/150',
+            infoLink: book.volumeInfo.infoLink
+          }))
+          .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)); // Sorting by date, newest first
   
         // Optionally slice the array if you need only a specific number of books
-         lst = lst.slice(0, 6);
-         console.log(lst.length)
-        return lst.slice(0,1);
+        const filteredBooks = sortedBooks.slice(0, 6); // Assuming you want the top 6
+        setIsLoading(false);
+        return filteredBooks;
+      } else {
+        setIsLoading(false);
+        return []; // Return an empty array if no items are found
       }
-      return []; // Return an empty array if no items are found
-    }
-    catch(error){
-      console.error("Query error:", error);
+    } catch (error) {
+      console.error('Query error:', error);
+      setIsLoading(false);
       return [];
     }
   };
+  
   
   return (
     
@@ -197,8 +183,8 @@ const fetchsummer = async () => {
                 
                 summer.slice(0, 6).map((book) => (
 
-                  <Link to ={`/book/:{$book.id}`} className='bookLink'>
-                  <div key={book.id} className='book-item'>a
+                  <Link to ={`/book/:${book.isbn13}`} className='bookLink'>
+                  <div key={book.isbn13} className='book-item'>a
                     <img src={book.image} alt={book.title || 'Book title'} />
                   </div></Link>)))}
           </div>
@@ -230,9 +216,9 @@ const fetchsummer = async () => {
               <div>Loading...</div>
               ) : (
                 classics.slice(0, 6).map((book) => (
-                  <Link to ={`/book/:{$book.id}`} className='bookLink'>
-                  <div key={book.id} className='book-item'>
-                    <img src={book.volumeInfo?.imageLinks?.thumbnail} alt={book.volumeInfo?.title || 'Book title'} />
+                  <Link to ={`/book/:${book.isbn13}`} className='bookLink'>
+                  <div key={book.isbn13} className='book-item'>
+                    <img src={book.image} alt={book.title || 'Book title'} />
                   </div></Link>)))
                   }
           </div>
