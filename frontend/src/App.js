@@ -183,7 +183,7 @@ const fetchsummer = async () => {
                 
                 summer.slice(0, 6).map((book) => (
 
-                  <Link to ={`/book/:${book.isbn13}`} className='bookLink'>
+                  <Link to ={`/book/${book.isbn13}`} className='bookLink'>
                   <div key={book.isbn13} className='book-item'>a
                     <img src={book.image} alt={book.title || 'Book title'} />
                   </div></Link>)))}
@@ -198,7 +198,7 @@ const fetchsummer = async () => {
               <div>Loading...</div>
               ) : (
                 nyt.slice(0, 6).map((book) => (
-                  <Link to ={`/book/:${book.primary_isbn13}`} className='bookLink'>
+                  <Link to ={`/book/${book.primary_isbn13}`} className='bookLink'>
                   <div key={book.primary_isbn13} className='book-item'>
                     <img src={book.book_image} alt={book.title || 'Book title'} />
                   </div>
@@ -216,7 +216,7 @@ const fetchsummer = async () => {
               <div>Loading...</div>
               ) : (
                 classics.slice(0, 6).map((book) => (
-                  <Link to ={`/book/:${book.isbn13}`} className='bookLink'>
+                  <Link to ={`/book/${book.isbn13}`} className='bookLink'>
                   <div key={book.isbn13} className='book-item'>
                     <img src={book.image} alt={book.title || 'Book title'} />
                   </div></Link>)))

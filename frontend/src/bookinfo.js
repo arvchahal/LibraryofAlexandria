@@ -11,7 +11,7 @@ const BookInfo = () => {
       setIsLoading(true);
       try {
         // Assuming you have the correct API key and the URL is formed properly
-        const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}?key=YOUR_API_KEY`);
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${id}&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
         const data = await response.json();
         // Assuming the API returns a single book object in data
         if (data.volumeInfo) {
