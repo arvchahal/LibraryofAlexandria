@@ -74,6 +74,6 @@ Project Link: https://github.com/arvchahal/LibraryofAlexandria.git
 ## Acknowledgments
 
 - Icons and UI components from React Icons and Material-UI
-- Book data and APIs from (https://openlibrary.org/)
+- Book data and APIs from the google books api and the NYT developers API
 
 Join us in rekindling the spirit of the ancient Library of Alexandria with the power of modern technology and community!
