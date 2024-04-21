@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
+
+
+
+.searchResults{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Align book items to the start */
+  gap: 1rem; /* Adjust the gap between the books as needed */
+}
+@media (max-width: 768px) {
+  .searchResults {
+    flex-direction: column; 
+    align-items: center; 
+  }
+}
+.book-item{
+  flex-direction: row; /* Align items in a row */
+
+}
+.book-item img{
+  width: 200px; /* or any other fixed dimensions */
+  height: 250px;
+  object-fit: fill; /* This ensures the image covers the space without distorting aspect ratio */
+}
+
+
+
+.navbar {
+  z-index: 10;
+}

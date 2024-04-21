@@ -1,0 +1,116 @@
+a.Home{
+  margin-left: 0px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 10px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.iconWithText a.Home:hover {
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
+  text-decoration: none;
+  
+}
+
+a.Search{
+  margin-left: 25px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 10px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.iconWithText a.Search:hover {
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
+  text-decoration: none;
+  
+}
+
+a.Your_Library{
+  margin-left: 25px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 10px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.iconWithText a.Your_Library:hover {
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
+  text-decoration: none;
+  
+}
+
+
+
+a.Reccs{
+  margin-left: 35px;
+  font-size: 12;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 20px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.iconWithText a.Reccs:hover {
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+
+.iconWithText a.SignIn {
+  margin-left: 105px;
+  color: #90bdc9;
+  display: inline-block;
+  padding: 20px;
+  background-color: #212121;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.iconWithText a.SignIn:hover {
+
+  color:#212121 ;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.homebar {
+  display: flex; /* This will align children horizontally */
+  justify-content: space-around; /* This spaces out the icons evenly */
+  align-items: center; /* This centers the icons vertically */
+  /* Add additional styles here if necessary */
+}

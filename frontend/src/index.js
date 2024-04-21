@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import Register from './Register'
 import BookDetails from './bookinfo'
+import Search from './search'
 
 import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 import HomePage from './homePage'
@@ -18,6 +19,7 @@ root.render(
       <Routes>
       <Route path ="/" element={<HomePage/>}/> 
       <Route path ="/Main" element={<App/>}/> 
+      <Route path ="/Search" element={<Search/>}/>
       <Route path ="/Reccomendations" element ={<RecPage/>}/>
       <Route path ="/Library" element ={<Library />}/>
       <Route path ="/Register" element ={<Register />}/>
