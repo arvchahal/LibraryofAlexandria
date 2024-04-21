@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import NavBar from './navbar';
 import "./bookinfo.css"
 const BookInfo = () => {
   const { isbn } = useParams();
@@ -45,7 +46,10 @@ const BookInfo = () => {
   if (!book) return <div className="error-message">Sorry, book not found.</div>;
 
   return (
+    <div>
+      <NavBar/>
     <div className="container">
+      
       <div className="title">
         <h1>{book.title}</h1>
         <p>Authors: {book.authors}</p>
@@ -59,6 +63,7 @@ const BookInfo = () => {
       <div className="libButton">
         <h2>Add to bookshelf</h2>
       </div>
+    </div>
     </div>
   );
 }
