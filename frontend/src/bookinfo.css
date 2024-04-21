@@ -1,0 +1,61 @@
+body {
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.title {
+  margin-bottom: 20px;
+  display: inline-block;
+  background-color: #5b8894;
+  padding: 10px;
+}
+
+.bookImage {
+  display: flex;
+  justify-content: center;
+}
+
+.bookImage img {
+  height: 300px;
+  width: 250px;
+}
+
+.bookDescription {
+  background-color: #5b8894;
+  padding: 20px;
+  margin: 20px 0;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.libButton {
+  background-color: #c6dde4;
+  display: inline-block;
+  padding: 20px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(253, 32, 32, 0.1);
+  transition: background-color 0.3s ease;
+
+}
+
+.libButton:hover {
+  background-color: #a38669;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.error-message{
+  background-color: orange;
+  display: inline-block;
+}
