@@ -1,31 +1,86 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
 
+/* Base setup */
+html, body {
+  font-family: 'Inconsolata', monospace;
+  color: #333;
+  background: #f4f4f4; /* Light background for better contrast */
+}
 
+/* Navbar styling */
+.navbar {
+  z-index: 10;
+  background: #2d5d88; /* Deep blue background */
+  padding: 1rem;
+  color: white;
+}
 
-.searchResults{
+/* Search container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Input field styling */
+.search-input {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid #2d5d88; /* Blue border to match the theme */
+  border-radius: 20px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: #4a90e2; /* Lighter blue for focus */
+  box-shadow: 0 2px 8px rgba(42, 88, 139, 0.3); /* Subtle shadow on focus */
+}
+
+/* Button styling */
+.search-button {
+  padding: 10px 20px;
+  background: #2d5d88; /* Matching the navbar */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #4a90e2; /* Lighter blue on hover */
+}
+
+/* Search results layout */
+.searchResults {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* Align book items to the start */
   gap: 1rem; /* Adjust the gap between the books as needed */
+  padding: 1rem;
 }
+
 @media (max-width: 768px) {
   .searchResults {
     flex-direction: column; 
     align-items: center; 
   }
 }
-.book-item{
+
+/* Book item styles */
+.book-item {
   flex-direction: row; /* Align items in a row */
-
-}
-.book-item img{
-  width: 200px; /* or any other fixed dimensions */
-  height: 250px;
-  object-fit: fill; /* This ensures the image covers the space without distorting aspect ratio */
+  background: white; /* Background for book items */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadows for depth */
 }
 
-
-
-.navbar {
-  z-index: 10;
+.book-item img {
+  width: 100%; /* Responsive width */
+  max-width: 200px; /* or any other fixed dimensions */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Better fitting for varying dimensions */
 }
