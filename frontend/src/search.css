@@ -4,7 +4,6 @@
 html, body {
   font-family: 'Inconsolata', monospace;
   color: #333;
-  background: #f4f4f4; /* Light background for better contrast */
 }
 
 /* Navbar styling */
@@ -25,6 +24,7 @@ html, body {
 /* Input field styling */
 .search-input {
   flex: 1;
+  color:#2d5d88;
   padding: 10px 20px;
   font-size: 16px;
   border: 2px solid #2d5d88; /* Blue border to match the theme */
@@ -42,7 +42,7 @@ html, body {
 .search-button {
   padding: 10px 20px;
   background: #2d5d88; /* Matching the navbar */
-  color: white;
+  color: rgb(115, 217, 248);
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -58,8 +58,9 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* Align book items to the start */
-  gap: 1rem; /* Adjust the gap between the books as needed */
-  padding: 1rem;
+  gap: 3rem; /* Adjust the gap between the books as needed */
+  padding: 3rem;
+  padding-top: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -71,9 +72,8 @@ html, body {
 
 /* Book item styles */
 .book-item {
+  
   flex-direction: row; /* Align items in a row */
-  background: white; /* Background for book items */
-  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadows for depth */
 }

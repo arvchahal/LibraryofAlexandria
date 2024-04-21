@@ -149,7 +149,7 @@ const fetchsummer = async () => {
                 summer.slice(0, 6).map((book) => (
 
                   <Link to ={`/book/${book.id}/${book.isbn13}`} className='bookLink'>
-                  <div key={book.id} className='book-item'>a
+                  <div key={book.id} className='book-item'>
                     <img src={book.image} alt={book.title || 'Book title'} />
                   </div></Link>)))}
           </div>
