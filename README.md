@@ -67,7 +67,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name – arnav.chahal@vanderbilt.edu
+Arnav Chahal – arnav.chahal@vanderbilt.edu
 
 Project Link: https://github.com/arvchahal/LibraryofAlexandria.git
 
