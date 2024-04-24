@@ -24,7 +24,8 @@ html, body {
 /* Input field styling */
 .search-input {
   flex: 1;
-  color:#2d5d88;
+  color:wheat;
+  background-color: #333;
   padding: 10px 20px;
   font-size: 16px;
   border: 2px solid #2d5d88; /* Blue border to match the theme */
