@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./search.css";
 import { Link } from 'react-router-dom';
 import NavBar from "./navbar";
+import { AuthProvider } from './contexts/authContext';
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -36,6 +37,8 @@ const Search = () => {
   };
 
   return (
+    <AuthProvider>
+
     <div className='main-wrapper'>
       <NavBar/>
 
@@ -65,6 +68,8 @@ const Search = () => {
        </div>
      </div>
     </div>
+    </AuthProvider>
+
   );
 };
 

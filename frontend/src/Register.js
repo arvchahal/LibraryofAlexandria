@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/authContext'; // Adjust the import path according to your project structure
 import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from './firebase/auth.js';
+import './Register.css';
+import NavBar from './navbar.js';
+
 const Register = () => {
   const { currentUser} = useAuth();
   const [email, setEmail] = useState('');
@@ -13,6 +16,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await doSignInWithEmailAndPassword(email, password);
+      
       setRedirect(true);
     } catch (error) {
       console.error('Login failed:', error);
@@ -47,6 +51,7 @@ const Register = () => {
   return (
     <div>
       <form onSubmit={isLogin ? handleLogin : handleRegister}>
+        <NavBar/>
         <div className="container">
           <div>
             <label htmlFor="email">Email:</label>

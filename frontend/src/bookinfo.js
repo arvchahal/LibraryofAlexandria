@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from './navbar';
 import "./bookinfo.css"
+import { AuthProvider } from './contexts/authContext';
+
 const BookInfo = () => {
   const { isbn } = useParams();
   const [book, setBook] = useState(null);
@@ -46,7 +48,9 @@ const BookInfo = () => {
   if (!book) return <div className="error-message">Sorry, book not found.</div>;
 
   return (
+    
     <div>
+      
       <NavBar/>
     <div className="container">
       

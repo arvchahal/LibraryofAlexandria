@@ -4,6 +4,7 @@ import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import NavBar from './navbar';
 import {classicNovels} from './constants'
+import { AuthProvider } from './contexts/authContext';
 
 function App() {
   const [summer, setSummer] = useState([]);
@@ -130,7 +131,7 @@ const fetchsummer = async () => {
   
   
   return (
-    
+    <AuthProvider>
     <IconContext.Provider value={{ size: "30px", color:"#90bdc9" }}>
       <div className="App">
       <NavBar />
@@ -189,6 +190,7 @@ const fetchsummer = async () => {
         
       </div>
     </IconContext.Provider>
+    </AuthProvider>
   );
 }
 

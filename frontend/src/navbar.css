@@ -87,7 +87,7 @@ a.Reccs{
 }
 
 
-.iconWithText a.SignIn {
+.iconWithText a.authButton {
   margin-left: 105px;
   color: #90bdc9;
   display: inline-block;
@@ -100,7 +100,7 @@ a.Reccs{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.iconWithText a.SignIn:hover {
+.iconWithText a.authButton:hover {
 
   color:#212121 ;
   background-color: #31495e;
@@ -113,4 +113,23 @@ a.Reccs{
   justify-content: space-around; /* This spaces out the icons evenly */
   align-items: center; /* This centers the icons vertically */
   /* Add additional styles here if necessary */
+}
+
+.iconWithText a.logout {
+  margin-left: 105px;
+  background-color: #90bdc9;
+  color: #212121;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.iconWithText a.logout:hover {
+  color: red;
+  background-color: #31495e;
+  box-shadow: 0 6px 8px rgba(227, 206, 206, 0.15);
 }
