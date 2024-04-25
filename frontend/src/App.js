@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { ImBooks } from "react-icons/im"; // users library with books they have read
-import { CiSearch } from "react-icons/ci"; //search icon for searching different books
-import { HiBuildingLibrary } from "react-icons/hi2"; //library icon returns to the homepage
 import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
 import NavBar from './navbar';

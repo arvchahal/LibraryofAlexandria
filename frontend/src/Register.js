@@ -1,43 +1,53 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from './contexts/authContext'; // Adjust the import path according to your project structure
+import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from './firebase/auth.js';
 const Register = () => {
-  const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Register
+  const { currentUser} = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState(''); // Only necessary for registration
+  const [isLogin, setIsLogin] = useState(true);
+  const [redirect, setRedirect] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Logging in with:', email, password);
-    // Implement login functionality here
+    try {
+      await doSignInWithEmailAndPassword(email, password);
+      setRedirect(true);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    console.log('Registering with:', username, email, password);
-    // Implement registration functionality here
+    try {
+      await doCreateUserWithEmailAndPassword(email, password);
+      setRedirect(true);
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
   };
 
+  // Redirect when logged in
+  useEffect(() => {
+    if (currentUser) {
+      setRedirect(true);
+    }
+  }, [currentUser]);
+
+  if (redirect) {
+    return <Navigate to="/Main" replace={true} />;
+  }
+
   return (
     <div>
       <form onSubmit={isLogin ? handleLogin : handleRegister}>
         <div className="container">
-          {!isLogin && (
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </div>
-          )}
           <div>
             <label htmlFor="email">Email:</label>
             <input
