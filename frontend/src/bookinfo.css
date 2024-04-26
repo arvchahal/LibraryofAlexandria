@@ -9,6 +9,8 @@ body {
 .container {
   max-width: 800px;
   margin: auto;
+  background-color: #5b8894;
+  border: none;
   margin-top: 30px;
 }
 

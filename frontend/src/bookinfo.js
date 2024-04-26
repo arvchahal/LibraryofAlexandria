@@ -48,9 +48,9 @@ const BookInfo = () => {
   if (!book) return <div className="error-message">Sorry, book not found.</div>;
 
   return (
-    
+    <AuthProvider>
     <div>
-      
+
       <NavBar/>
     <div className="container">
       
@@ -69,6 +69,7 @@ const BookInfo = () => {
       </div>
     </div>
     </div>
+    </AuthProvider>
   );
 }
 

@@ -24,7 +24,7 @@ html, body {
 /* Input field styling */
 .search-input {
   flex: 1;
-  color:wheat;
+  color: wheat;
   background-color: #333;
   padding: 10px 20px;
   font-size: 16px;
@@ -55,7 +55,7 @@ html, body {
 }
 
 /* Search results layout */
-.searchResults {
+.search-results {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start; /* Align book items to the start */
@@ -65,18 +65,21 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  .searchResults {
-    flex-direction: column; 
-    align-items: center; 
+  .search-results {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 /* Book item styles */
 .book-item {
-  
-  flex-direction: row; /* Align items in a row */
+  display: flex; /* Align items in a row */
+  flex-direction: column;
+  align-items: center;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadows for depth */
+  padding: 10px;
+  max-width: 200px; /* or any other fixed dimensions */
 }
 
 .book-item img {
