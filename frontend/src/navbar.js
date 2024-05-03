@@ -12,7 +12,7 @@ import "./navbar.css"; // Import your custom CSS
 const NavBar = () => {
   const { currentUser } = useAuth(); // Get current user from context
   const navigate = useNavigate(); // Hook to program navigation
-
+  console.log(currentUser)
   const handleLogout = async () => {
     try {
       await signOut(auth);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from './contexts/authContext'; // Adjust the import path according to your project structure
+import { AuthProvider, useAuth } from './contexts/authContext'; // Adjust the import path according to your project structure
 import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from './firebase/auth.js';
 import './Register.css';
 import NavBar from './navbar.js';
@@ -49,6 +49,7 @@ const Register = () => {
   }
 
   return (
+    <AuthProvider>
     <div>
       <form onSubmit={isLogin ? handleLogin : handleRegister}>
         <NavBar/>
@@ -80,6 +81,7 @@ const Register = () => {
         </div>
       </form>
     </div>
+    </AuthProvider>
   );
 }
 

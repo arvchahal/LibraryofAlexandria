@@ -10,11 +10,13 @@ import HomePage from './homePage'
 import Library from './Library'
 
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './contexts/authContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
+      <AuthProvider>
       <Routes>
       <Route path ="/" element={<HomePage/>}/> 
       <Route path ="/Main" element={<App/>}/> 
@@ -26,6 +28,7 @@ root.render(
 
 
       </Routes> 
+      </AuthProvider>
       </Router>
   </React.StrictMode>
 );

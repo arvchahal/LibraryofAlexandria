@@ -3,7 +3,7 @@ import { auth } from '../../firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 // import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword, doPasswordReset } from '../../firebase/auth'; // Adjust the path as necessary
 
-const AuthContext = React.createContext({
+export const AuthContext = React.createContext({
   currentUser: null,
   userLoggedIn: false,
   loading: true
