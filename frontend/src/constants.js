@@ -15,7 +15,6 @@ export  const classicNovels = [
   { title: "Jane Eyre", author: "Charlotte Brontë" },
   { title: "Wuthering Heights", author: "Emily Brontë" },
   { title: "Great Expectations", author: "Charles Dickens" },
-  { title: "Anna Karenina", author: "Leo Tolstoy" },
   { title: "Madame Bovary", author: "Gustave Flaubert" },
   { title: "The Adventures of Huckleberry Finn", author: "Mark Twain" },
   { title: "Don Quixote", author: "Miguel de Cervantes" },

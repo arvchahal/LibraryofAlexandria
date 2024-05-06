@@ -13,7 +13,7 @@ const Library = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      navigate('/login'); // Redirect to login if no user is logged in
+      navigate('/Register'); // Redirect to login if no user is logged in
     } else {
       const booksRef = ref(db, 'userBooks/' + currentUser.uid);
       onValue(booksRef, (snapshot) => {
@@ -45,14 +45,14 @@ const Library = () => {
         {books.length > 0 ? (
           books.map(book => (
             <div key={book.id} className="book-item-lib">
-              <Link to={`/book/${book.id}/${book.isbn13}`}>
+              <Link to={`/book/${book.id}/${book.isbn10}/${book.isbn13}`}>
                 <img src={book.image || 'https://via.placeholder.com/150'} alt={`Cover of ${book.title}`} />
                 
               </Link>
             </div>
           ))
         ) : (
-          <p className='empty'>This library is empty. Add some books.</p>
+          <h3 className='empty'>This library is empty. Add some books.</h3>
         )}
       </div>
     </div>

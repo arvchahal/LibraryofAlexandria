@@ -75,7 +75,7 @@ const Register = () => {
             />
           </div>
           <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
-          <button type="button" onClick={toggleForm}>
+          <button type="button-reg" onClick={toggleForm}>
             {isLogin ? 'Need to create an account?' : 'Already have an account?'}
           </button>
         </div>

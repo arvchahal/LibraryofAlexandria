@@ -5,9 +5,8 @@ import "./bookinfo.css";
 import { AuthProvider, AuthContext } from './contexts/authContext';
 import { db } from './firebase/firebase'; // Ensure you import your Firebase config correctly
 import { ref, set, onValue, remove } from 'firebase/database';
-
 const BookInfo = () => {
-  const { isbn } = useParams();
+  const { isbn10,isbn13 } = useParams();
   const [book, setBook] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isBookInLibrary, setIsBookInLibrary] = useState(false);
@@ -18,14 +17,15 @@ const BookInfo = () => {
     const fetchDetails = async () => {
       setIsLoading(true);
       try {
-        const res = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`;
+        const res = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn13}&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`;
         const response = await fetch(res);
         const data = await response.json();
 
         if (data.items) {
           const bookData = {
             title: data.items[0].volumeInfo.title,
-            isbn13: data.items[0].volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_13")?.identifier,
+            isbn13: data.items[0].volumeInfo.industryIdentifiers.find(id=>id.type==="ISBN_13")?.identifier,
+            isbn10: data.items[0].volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_10")?.identifier,
             description: data.items[0].volumeInfo.description,
             authors: data.items[0].volumeInfo.authors ? data.items[0].volumeInfo.authors.join(', ') : 'Unknown Author',
             publishedDate: data.items[0].volumeInfo.publishedDate,
@@ -47,16 +47,16 @@ const BookInfo = () => {
     fetchDetails();
 
     if (currentUser) {
-      const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn}`);
+      const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn10}`);
       onValue(bookRef, (snapshot) => {
         setIsBookInLibrary(snapshot.exists());
       });
     }
-  }, [currentUser, isbn]); // Dependency array to rerun the effect if id or currentUser changes
+  }, [currentUser, isbn10,isbn13]); // Dependency array to rerun the effect if id or currentUser changes
 
   const handleAddBook = async () => {
     if (currentUser) {
-      const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn}`);
+      const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn10}`);
       await set(bookRef, book);
       setIsBookInLibrary(true);
       console.log("Book added to library successfully");
@@ -68,7 +68,7 @@ const BookInfo = () => {
 
   const deleteBookFromLibrary = async () => {
     if (currentUser) {
-      const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn}`);
+      const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn10}`);
       await remove(bookRef);
       setIsBookInLibrary(false);
       navigate('/Library');

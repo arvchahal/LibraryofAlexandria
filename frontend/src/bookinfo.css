@@ -42,19 +42,20 @@ body {
 }
 
 .libButton {
-  background-color: #c6dde4;
+  background-color: wheat;
   padding: 10px; /* Reduced padding to make the button smaller */
   font-size: 0.8em; /* Reduced font-size for smaller button text */
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
+  color:rgb(117, 178, 245);
   box-shadow: 0 4px 6px rgba(253, 32, 32, 0.1);
   transition: background-color 0.3s ease;
   margin-left: auto; /* This will push the button to the right */
 }
 
 .libButton:hover {
-  background-color: #a38669;
+  background-color: #856d56;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }

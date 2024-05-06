@@ -24,7 +24,7 @@ root.render(
       <Route path ="/Recommendations" element ={<ReccomendationPage/>}/>
       <Route path ="/Library" element ={<Library />}/>
       <Route path ="/Register" element ={<Register />}/>
-      <Route path="/book/:id/:isbn" element={<BookDetails/>} />
+      <Route path="/book/:id/:isbn10/:isbn13" element={<BookDetails/>} />
 
 
       </Routes> 
