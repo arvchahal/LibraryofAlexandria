@@ -4,7 +4,7 @@ import { AuthProvider, useAuth } from './contexts/authContext'; // Adjust the im
 import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from './firebase/auth.js';
 import './Register.css';
 import NavBar from './navbar.js';
-
+import auth from "./firebase/firebase.js"
 const Register = () => {
   const { currentUser} = useAuth();
   const [email, setEmail] = useState('');
@@ -16,13 +16,12 @@ const Register = () => {
     e.preventDefault();
     try {
       await doSignInWithEmailAndPassword(email, password);
-      
       setRedirect(true);
     } catch (error) {
       console.error('Login failed:', error);
     }
   };
-
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
@@ -32,6 +31,9 @@ const Register = () => {
       console.error('Registration failed:', error);
     }
   };
+
+  
+  
 
   const toggleForm = () => {
     setIsLogin(!isLogin);

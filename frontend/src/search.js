@@ -61,7 +61,7 @@ const Search = () => {
               <p>Loading...</p>
             ) : (
               results.map((book) => (
-                <Link to={`/book/${book.id}/${book.isbn13}`} className="bookLink" key={book.id}>
+                <Link to={`/book/${book.id}/${book.isbn10}/${book.isbn13}`} className="bookLink" key={book.id}>
                   <div className="book-item">
                     <img src={book.image} alt={book.title} />
                   </div>

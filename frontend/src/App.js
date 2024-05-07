@@ -64,18 +64,21 @@ const fetchsummer = async () => {
 };
 
 
-  const fetchBooksClassics = async() => {
-    setIsLoading(true);
-    const random = getRandomBooks(10,classicNovels);
-    const books = await Promise.all(random.map(book=>{
-      const query = `intitle:"${book.title}" inauthor:"${book.author}"`;
-      return fetchBooks(query);
+const fetchBooksClassics = async() => {
+  setIsLoading(true);
+  try {
+    const random = getRandomBooks(10, classicNovels);
+    const books = await Promise.all(random.map(async book => {
+      const query = `isbn:${book.isbn}`;
+      return await fetchBooks(query);
     }));
+    console.log(books);  // Check what is being set in state
     setClassics(books.flat());
-    setIsLoading(false);
-
-
+  } catch (error) {
+    console.error('Failed to fetch classic books:', error);
   }
+  setIsLoading(false);
+};
 
   const fetchNYT = async () => {
     setIsLoading(true);
@@ -107,8 +110,8 @@ const fetchsummer = async () => {
           .map(book => ({
             id: book.id,
             title: book.volumeInfo.title,
-            isbn10: book.volumeInfo.industryIdentifiers?.find(identifier => identifier.type === "ISBN_10"),
-            isbn13: book.volumeInfo.industryIdentifiers?.find(identifier => identifier.type === "ISBN_13")?.identifier || "ISBN not available",
+            isbn10: book.volumeInfo.industryIdentifiers?.find(identifier => identifier.type === "ISBN_10")?.identifier || "",
+            isbn13: book.volumeInfo.industryIdentifiers?.find(identifier => identifier.type === "ISBN_13")?.identifier || "",
 
             authors: book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author',
             publishedDate: book.volumeInfo.publishedDate,
@@ -116,7 +119,7 @@ const fetchsummer = async () => {
             infoLink: book.volumeInfo.infoLink
           }))
           .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)); // Sorting by date, newest first
-  
+
         // Optionally slice the array if you need only a specific number of books
         const filteredBooks = sortedBooks.slice(0, 1); // Assuming you want the top 6
         setIsLoading(false);
@@ -182,6 +185,7 @@ const fetchsummer = async () => {
               <div>Loading...</div>
               ) : (
                 classics.slice(0, 6).map((book) => (
+
                   <Link to ={`/book/${book.id}/${book.isbn10}/${book.isbn13}`} className='bookLink'>
                   <div key={book.id} className='book-item'>
                     <img src={book.image} alt={book.title || 'Book title'} />

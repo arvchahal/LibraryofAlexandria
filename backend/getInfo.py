@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 import json
 
-cred = credentials.Certificate('libofalex-8397c-firebase-adminsdk-v45ws-38bb278209.json')
+cred = credentials.Certificate('apiFolder/apiFolder/libofalex-8397c-firebase-adminsdk-v45ws-38bb278209.json')
 
 firebase_admin.initialize_app(cred,{
 

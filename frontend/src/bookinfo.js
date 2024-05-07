@@ -6,12 +6,14 @@ import { AuthProvider, AuthContext } from './contexts/authContext';
 import { db } from './firebase/firebase'; // Ensure you import your Firebase config correctly
 import { ref, set, onValue, remove } from 'firebase/database';
 const BookInfo = () => {
+  const navigate = useNavigate();
   const { isbn10,isbn13 } = useParams();
+
   const [book, setBook] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isBookInLibrary, setIsBookInLibrary] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -56,11 +58,17 @@ const BookInfo = () => {
 
   const handleAddBook = async () => {
     if (currentUser) {
+      try{
       const bookRef = ref(db, `userBooks/${currentUser.uid}/${isbn10}`);
       await set(bookRef, book);
       setIsBookInLibrary(true);
-      console.log("Book added to library successfully");
+      
       navigate('/Library'); // Navigate to library page
+      }
+      catch(error){
+        alert("There has been an adding the book to the library try searching the title and adding a different edition")
+      }
+
     } else {
       navigate('/Register'); // Redirect to login page if not logged in
     }
