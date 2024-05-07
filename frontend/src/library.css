@@ -1,0 +1,40 @@
+/* Styling for the Book Grid */
+.book-grid-lib {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Aligns book items to the start of the line */
+  gap: 2rem; /* Increased space between each book */
+  margin-top: 2rem; /* Added space at the top of the book grid */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .book-grid-lib {
+    flex-direction: column; /* Stacks the books vertically */
+    align-items: center; /* Centers the books */
+    gap: 1rem; /* Smaller gap for vertical stacking */
+  }
+}
+
+/* Individual Book Item Styling */
+.book-item-lib {
+  width: 220px; /* Slightly increased width for each book */
+  height: 300px; /* Increased height for each book */
+  padding-left: 75px;
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensures images don't spill out */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: Adds subtle shadow for depth */
+}
+
+.book-item-lib img {
+  width: 100%; /* Image covers the full width of its container */
+  height: 100%; /* Image covers the full height of its container */
+  object-fit: cover; /* Ensures the image covers the area properly without distortion */
+}
+
+.empty {
+  background-color: rgb(80, 157, 250);
+  text-align: center;
+  padding: 20px 0;  
+  margin: 0 auto;  
+}
