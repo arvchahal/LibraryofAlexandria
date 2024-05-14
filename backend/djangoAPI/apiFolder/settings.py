@@ -97,7 +97,8 @@ DATABASES = {
     }
 }
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Adjust the port if necessary
+    'http://localhost:3000',
+    'http://localhost:3001'  # Adjust the port if necessary
 ]
 
 # Password validation
