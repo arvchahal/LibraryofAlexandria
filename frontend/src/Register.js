@@ -4,24 +4,29 @@ import { AuthProvider, useAuth } from './contexts/authContext'; // Adjust the im
 import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from './firebase/auth.js';
 import './Register.css';
 import NavBar from './navbar.js';
-//import auth from "./firebase/firebase.js"
 
 const Register = () => {
-  const { currentUser, setCurrentUserToken } = useAuth(); // Assuming useAuth provides a way to set the current user token
+  const { currentUser, setCurrentUserToken } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [redirect, setRedirect] = useState(false);
+  const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await doSignInWithEmailAndPassword(email, password);
-      const token = await userCredential.user.getIdToken(); // Fetch the Firebase auth token
-      setCurrentUserToken(token); // Store the token using a context method or similar approach
+      const token = await userCredential.user.getIdToken();
+      setCurrentUserToken(token);
       setRedirect(true);
     } catch (error) {
-      console.error('Login failed:', error);
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        alert("Incorrect email or password.");
+      } else {
+        console.error('Login failed:', error);
+      }
+      setError('Login failed: ' + error.message);
     }
   };
 
@@ -29,11 +34,16 @@ const Register = () => {
     e.preventDefault();
     try {
       const userCredential = await doCreateUserWithEmailAndPassword(email, password);
-      const token = await userCredential.user.getIdToken(); // Fetch the Firebase auth token after registration
-      setCurrentUserToken(token); // Store the token
+      const token = await userCredential.user.getIdToken();
+      setCurrentUserToken(token);
       setRedirect(true);
     } catch (error) {
-      console.error('Registration failed:', error);
+      if (error.code === 'auth/email-already-in-use') {
+        alert("Already have an account with this email.");
+      } else {
+        console.error('Registration failed:', error);
+      }
+      setError('Registration failed: ' + error.message);
     }
   };
 
@@ -41,7 +51,6 @@ const Register = () => {
     setIsLogin(!isLogin);
   };
 
-  // Redirect when logged in
   useEffect(() => {
     if (currentUser) {
       setRedirect(true);
@@ -83,6 +92,7 @@ const Register = () => {
               {isLogin ? 'Need to create an account?' : 'Already have an account?'}
             </button>
           </div>
+          {error && <p className="error-message">Incorrect Password or Not a valid account</p>}
         </form>
       </div>
     </AuthProvider>
