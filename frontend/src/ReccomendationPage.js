@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import NavBar from './navbar';
+import { ref, onValue } from 'firebase/database';
+import { db } from './firebase/firebase';
+
 import { useAuth } from './contexts/authContext';
 import BACKEND_URL from './config';
 import "./ReccomendationPage.css";
@@ -10,6 +13,9 @@ const RecommendationPage = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
+
 
   const fetchBookDetailsFromGoogleBooks = useCallback((books) => {
     if (books.length === 0) {
@@ -58,24 +64,56 @@ const RecommendationPage = () => {
   }, []);
 
   const generateRecommendations = useCallback(async (userId, token) => {
+    setLoading(true);
+    setError(''); // Clear previous errors
     try {
+      const booksRef = ref(db, 'userBooks/' + currentUser.uid);
+      onValue(booksRef, (snapshot) => {
+        const bks = snapshot.val();
+        if (bks) {
+          const loadedBooks = Object.keys(bks).map(key => ({
+            id: key,
+            ...bks[key]
+          }));
+          setBooks(loadedBooks);
+        } else {
+          setBooks([]);
+        }
+        setLoading(false);
+      }, {
+        onlyOnce: true
+      });
+
+      if(books.length <= 0){
+        return(
+          <div>
+            <p>In order to get reccomendations please add books to your library</p>
+
+
+          </div>
+        )
+      }
+
+
       const response = await fetch(`${BACKEND_URL}/get-user-books/${userId}/`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log('fetched')
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
+
       const data = await response.json();
-      console.log('Backend data:', data);  // Log the received data
-  
+      if (data.books && data.books.length === 0) {
+        setError('Please add books to your library to continue.');
+        setLoading(false);
+        return;
+      }
+
       if (data.recommendations && data.recommendations.length > 0) {
-        //console.log(data.recommendations.slice(0,3))
         fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 3).map(title => ({ title })));
       } else {
         setError('No recommendations found');
@@ -86,39 +124,38 @@ const RecommendationPage = () => {
       setError(error.message);
       setLoading(false);
     }
-  }, [fetchBookDetailsFromGoogleBooks]);
-  
-  
+  }, [fetchBookDetailsFromGoogleBooks, books,currentUser.uid]);
 
-  const checkFirebaseForRecommendations = useCallback((userId) => {
+  const checkFirebaseForRecommendations = useCallback(async (userId) => {
+    setLoading(true);
+    setError(''); // Clear previous errors
     const firebaseURL = `https://libofalex-8397c-default-rtdb.firebaseio.com/userRecs/${userId}.json`;
-    fetch(firebaseURL)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch from Firebase');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data && data.recommendations && data.recommendations.length > 0) {
-          
-          fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 3).map(title => ({ title })));
-        } else {
-          console.log('ok')
-          generateRecommendations(userId, currentUserToken);
-        }
-      })
-      .catch(error => {
-        console.error('Failed to fetch recommendations from Firebase:', error);
-        setError('Failed to fetch recommendations');
-        setLoading(false);
-      });
+    try {
+      const response = await fetch(firebaseURL);
+      if (!response.ok) {
+        throw new Error('Failed to fetch from Firebase');
+      }
+      const data = await response.json();
+      if (data && data.recommendations && data.recommendations.length > 0) {
+        fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 3).map(title => ({ title })));
+      } else {
+        generateRecommendations(userId, currentUserToken);
+      }
+    } catch (error) {
+      console.error('Failed to fetch recommendations from Firebase:', error);
+      setError('Failed to fetch recommendations');
+      setLoading(false);
+    }
   }, [currentUserToken, generateRecommendations, fetchBookDetailsFromGoogleBooks]);
-  
+
   useEffect(() => {
+    if(!currentUser){
+      navigate('/Register');
+    }
     if (currentUser && currentUserToken) {
       checkFirebaseForRecommendations(currentUser.uid);
     } else {
+
       setLoading(false);
     }
   }, [currentUser, currentUserToken, checkFirebaseForRecommendations]);
