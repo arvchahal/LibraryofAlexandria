@@ -18,7 +18,7 @@ const RecommendationPage = () => {
       return;
     }
 
-    const delayBetweenRequests = 10;
+    const delayBetweenRequests = 100;
 
     const fetchBook = (book, index) => new Promise((resolve, reject) => setTimeout(async () => {
       try {
@@ -75,7 +75,8 @@ const RecommendationPage = () => {
       console.log('Backend data:', data);  // Log the received data
   
       if (data.recommendations && data.recommendations.length > 0) {
-        fetchBookDetailsFromGoogleBooks(data.recommendations);
+        //console.log(data.recommendations.slice(0,3))
+        fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 3).map(title => ({ title })));
       } else {
         setError('No recommendations found');
         setLoading(false);
