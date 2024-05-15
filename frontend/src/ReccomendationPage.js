@@ -111,7 +111,7 @@ const RecommendationPage = () => {
       }
 
       if (data.recommendations && data.recommendations.length > 0) {
-        fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 3).map(title => ({ title })));
+        fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 5).map(title => ({ title })));
       } else {
         setError('No recommendations found');
         setLoading(false);
@@ -134,7 +134,7 @@ const RecommendationPage = () => {
       }
       const data = await response.json();
       if (data && data.recommendations && data.recommendations.length > 0) {
-        fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 3).map(title => ({ title })));
+        fetchBookDetailsFromGoogleBooks(data.recommendations.slice(0, 5).map(title => ({ title })));
       } else {
         generateRecommendations(userId, currentUserToken);
       }

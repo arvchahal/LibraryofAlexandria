@@ -11,7 +11,7 @@ body {
 
 .header {
   text-align: center;
-  color: #FA7202;
+  color: #f58223;
 }
 
 .Enter {
@@ -26,7 +26,7 @@ body {
 }
 
 .Enter:hover {
-  background-color: #ff8000;
+  background-color: #90bdc9;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
@@ -42,7 +42,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: darkgrey; /* color of the scrollbar itself */
   border-radius: 10px; /* roundness of the scrollbar */
-  border: 3px solid orange; /* creates a border around the scrollbar */
+  border: 3px solid #90bdc9; /* creates a border around the scrollbar */
 }
 
 /* Styles for the part of the scrollbar track that is not covered by the thumb */
