@@ -61,27 +61,32 @@ const RecommendationPage = () => {
       });
   }, []);
 
+  const fetchUserBooks = useCallback((userId) => {
+    setLoading(true);
+    setError('');
+    const booksRef = ref(db, 'userBooks/' + userId);
+    onValue(booksRef, (snapshot) => {
+      const bks = snapshot.val();
+      if (bks) {
+        const loadedBooks = Object.keys(bks).map(key => ({
+          id: key,
+          ...bks[key]
+        }));
+        setBooks(loadedBooks);
+      } else {
+        setBooks([]);
+      }
+      setLoading(false);
+    }, {
+      onlyOnce: true
+    });
+  }, []);
+
   const generateRecommendations = useCallback(async (userId, token) => {
     setLoading(true);
     setError(''); // Clear previous errors
     try {
-      const booksRef = ref(db, 'userBooks/' + userId);
-      onValue(booksRef, (snapshot) => {
-        const bks = snapshot.val();
-        if (bks) {
-          const loadedBooks = Object.keys(bks).map(key => ({
-            id: key,
-            ...bks[key]
-          }));
-          setBooks(loadedBooks);
-        } else {
-          setBooks([]);
-        }
-      }, {
-        onlyOnce: true
-      });
-
-      if(books.length <= 0){
+      if (books.length === 0) {
         setError('Please add books to your library to continue.');
         setLoading(false);
         return;
@@ -143,12 +148,18 @@ const RecommendationPage = () => {
   useEffect(() => {
     if (!currentUser) {
       navigate('/Register');
-    } else if (currentUser && currentUserToken) {
+    } else {
+      fetchUserBooks(currentUser.uid);
+    }
+  }, [currentUser, navigate, fetchUserBooks]);
+
+  useEffect(() => {
+    if (currentUser && currentUserToken && books.length > 0) {
       checkFirebaseForRecommendations(currentUser.uid);
     } else {
       setLoading(false);
     }
-  }, [currentUser, currentUserToken, checkFirebaseForRecommendations, navigate]);
+  }, [currentUser, currentUserToken, checkFirebaseForRecommendations, books.length]);
 
   return (
     <div>
@@ -167,7 +178,12 @@ const RecommendationPage = () => {
           <button className="generate-button" onClick={() => generateRecommendations(currentUser.uid, currentUserToken)}>Generate New Recommendations</button>
         </div>
       ) : (
-        !loading && <div className="no-recommendations">{error || "No recommendations available. Please add more books or log in to see recommendations."}</div>
+        !loading && <div className="no-recommendations">{error ||          
+        <>
+          No recommendations available. <br />
+          Please add more books or log in to see recommendations.
+        </>}
+        </div>
       )}
     </div>
   );
