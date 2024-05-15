@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import NavBar from './navbar';
 import { ref, onValue } from 'firebase/database';
 import { db } from './firebase/firebase';
-
 import { useAuth } from './contexts/authContext';
 import BACKEND_URL from './config';
 import "./ReccomendationPage.css";
@@ -15,7 +14,6 @@ const RecommendationPage = () => {
   const [error, setError] = useState('');
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
-
 
   const fetchBookDetailsFromGoogleBooks = useCallback((books) => {
     if (books.length === 0) {
@@ -67,7 +65,7 @@ const RecommendationPage = () => {
     setLoading(true);
     setError(''); // Clear previous errors
     try {
-      const booksRef = ref(db, 'userBooks/' + currentUser.uid);
+      const booksRef = ref(db, 'userBooks/' + userId);
       onValue(booksRef, (snapshot) => {
         const bks = snapshot.val();
         if (bks) {
@@ -79,21 +77,15 @@ const RecommendationPage = () => {
         } else {
           setBooks([]);
         }
-        setLoading(false);
       }, {
         onlyOnce: true
       });
 
       if(books.length <= 0){
-        return(
-          <div>
-            <p>In order to get reccomendations please add books to your library</p>
-
-
-          </div>
-        )
+        setError('Please add books to your library to continue.');
+        setLoading(false);
+        return;
       }
-
 
       const response = await fetch(`${BACKEND_URL}/get-user-books/${userId}/`, {
         method: 'GET',
@@ -124,7 +116,7 @@ const RecommendationPage = () => {
       setError(error.message);
       setLoading(false);
     }
-  }, [fetchBookDetailsFromGoogleBooks, books,currentUser.uid]);
+  }, [fetchBookDetailsFromGoogleBooks, books]);
 
   const checkFirebaseForRecommendations = useCallback(async (userId) => {
     setLoading(true);
@@ -149,21 +141,19 @@ const RecommendationPage = () => {
   }, [currentUserToken, generateRecommendations, fetchBookDetailsFromGoogleBooks]);
 
   useEffect(() => {
-    if(!currentUser){
+    if (!currentUser) {
       navigate('/Register');
-    }
-    if (currentUser && currentUserToken) {
+    } else if (currentUser && currentUserToken) {
       checkFirebaseForRecommendations(currentUser.uid);
     } else {
-
       setLoading(false);
     }
-  }, [currentUser, currentUserToken, checkFirebaseForRecommendations]);
+  }, [currentUser, currentUserToken, checkFirebaseForRecommendations, navigate]);
 
   return (
     <div>
       <NavBar />
-      {loading && <div className="loading">Loading recommendations...</div>}
+      {loading && <div className="loading-box">Loading recommendations...</div>}
       {error && <div className="error">{error}</div>}
       {!loading && !error && recommendations.length > 0 ? (
         <div className="content">
