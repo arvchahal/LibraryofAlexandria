@@ -46,10 +46,10 @@ To get started with the Library of Alexandria, follow these steps:
 
 ## Technology Stack
 
-- **Frontend**: React.js for building the user interface, Redux for state management.
+- **Frontend**: React.js for building the user interface
 - **Backend**: Django for RESTful API services.
 - **Database**: firebase realtime db.
-- **Machine Learning**: Python with libraries such as NumPy and SciPy for calculating cosine similarity and generating book recommendations.
+- **Machine Learning**: Sci-kit learn libraries for calculating cosine similarity and generating book recommendations.
 
 ## Contributing
 
