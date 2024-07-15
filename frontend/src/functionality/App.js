@@ -31,7 +31,7 @@ const fetchsummer = async () => {
   setIsLoading(true);
   try {
     // Update the query to focus on 'fantasy' genre
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy+subject:%22Young%20Adult%20Fiction%22&maxResults=40&orderBy=newest&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fantasy+subject:%22Young%20Adult%20Fiction%22&maxResults=40&orderBy=newest&key=`);
 
     const data = await response.json();
     if (data.items) {
@@ -84,7 +84,7 @@ const fetchBooksClassics = async() => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=LeCRVkW6ihsaQ385MnU3n2yWcjucscvW');
+      const response = await fetch('https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=');
       const data = await response.json();
       if (data.results && data.results.lists) {
         const lists = data.results.lists.map(list => list.books).flat();
@@ -103,7 +103,7 @@ const fetchBooksClassics = async() => {
   const fetchBooks = async (query) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40&key=`);
       const data = await response.json();
       if (data.items) {
         const sortedBooks = data.items
