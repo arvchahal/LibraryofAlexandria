@@ -19,7 +19,7 @@ const BookInfo = () => {
     const fetchDetails = async () => {
       setIsLoading(true);
       try {
-        const res = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn13}&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`;
+        const res = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn13}&key=`;
         const response = await fetch(res);
         const data = await response.json();
 
