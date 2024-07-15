@@ -17,7 +17,7 @@ const Search = () => {
     }
     setIsLoading(true);
     try {
-      const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(search)}&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`;
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(search)}&key=`;
       const response = await fetch(url);
       const data = await response.json();
       const sortedBooks = data.items
