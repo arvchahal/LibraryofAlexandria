@@ -26,7 +26,7 @@ const RecommendationPage = () => {
 
     const fetchBook = (book, index) => new Promise((resolve, reject) => setTimeout(async () => {
       try {
-        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(book.title)}&key=AIzaSyA-PpwqzBUD3-6-6hfUJ3lWfvpbrw11vTY`);
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(book.title)}&key=`);
         const data = await response.json();
         if (data.items && data.items.length > 0) {
           const volumeInfo = data.items[0].volumeInfo;
