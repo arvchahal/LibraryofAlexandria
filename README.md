@@ -5,6 +5,8 @@
 Welcome to the Library of Alexandria, an online platform where the wisdom of ages meets the technology of today. Our service offers a comprehensive digital library that allows users to search for books, add them to their personal library, and receive tailored recommendations powered by advanced machine learning algorithms.
 
 ## Features
+-- DISCLAIMER: Backend no longer in production due to AWS costs
+-- frontend production here: https://frontend-indol-six-87.vercel.app/
 
 - **Book Search**: Explore a vast collection of books across various genres and authors. Our intuitive search feature allows you to find books by title, author, or keywords.
 - **Personal Library**: Add books to your personal library for easy access and organization. Keep track of your reading journey and curate your collection.
